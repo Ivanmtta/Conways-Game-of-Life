@@ -6,9 +6,12 @@
 	</head>
 	<body>
 		<canvas id = "frame" width = "500" height = "500"></canvas>
-		<input id = "play" type = "button" value = "Stop" onclick = "playButtonClick(this)"/>
-		<input id = "clear" type = "button" value = "Clear" onclick = "clearButtonClick()"/>
-		<input id = "generate" type = "button" value = "Generate" onclick = "generateButtonClick()"/>
+		<input type = "button" value = "Stop" onclick = "playButtonClick(this)"/>
+		<input type = "button" value = "Clear" onclick = "clearButtonClick()"/>
+		<input type = "button" value = "Generate" onclick = "generateButtonClick()"/>
+		<input type = "button" value = "Increase Speed" onclick = "increaseSpeed()"/>
+		<input type = "button" value = "Decrease Speed" onclick = "decreaseSpeed()"/>
+		<p id = "speedL">Speed: 100ms</p>
 		<script src = "Cell.js"></script>
 		<script src = "code.js"></script>
 	</body>
