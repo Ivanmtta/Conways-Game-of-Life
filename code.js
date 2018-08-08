@@ -6,6 +6,8 @@ var cols = frame.width / scale + 2;
 var rows = frame.height / scale + 2;
 var cells = [];
 var play = true;
+var speed = 100;
+var speedLabel = document.getElementById("speedL");
 
 onCreate()
 
@@ -92,4 +94,22 @@ function generateButtonClick(){
 	}
 }
 
-setInterval(update, 100);
+function increaseSpeed(){
+	if(speed > 10){
+		speed -= 10;
+		speedLabel.innerHTML = "Speed: " + speed + "ms";
+		clearInterval(interval);
+		interval = setInterval(update, speed);
+	}
+}
+
+function decreaseSpeed(){
+	if(speed < 1000){
+		speed += 10;
+		speedLabel.innerHTML = "Speed: " + speed + "ms";
+		clearInterval(interval);
+		interval = setInterval(update, speed);
+	}
+}
+
+var interval = setInterval(update, speed);
