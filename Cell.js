@@ -5,9 +5,11 @@ function Cell(x, y, size, alive){
 	this.alive = alive;
 
 	this.update = function(aliveNeighbors){
-		if(aliveNeighbors < 0){
-			console.log(aliveNeighbors);
+		if(this.alive && (aliveNeighbors < 2 || aliveNeighbors > 3)){
 			this.alive = false;
+		}
+		else if(!this.alive && (aliveNeighbors == 3)){
+			this.alive = true;
 		}
 	}
 
