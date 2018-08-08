@@ -12,12 +12,17 @@ function Cell(x, y, size, alive){
 	}
 
 	this.draw = function(){
+		graphics.beginPath();
+		graphics.rect(this.x, this.y, this.size, this.size);
 		if(this.alive){
 			graphics.fillStyle = "#FFFFFF";
 		}
 		else{
 			graphics.fillStyle = "#000000";
 		}
-		graphics.fillRect(this.x, this.y, this.size, this.size);
+		graphics.lineWidth = this.size / 10;
+		graphics.fill();
+		graphics.stroke();
+		graphics.closePath();
 	}
 }

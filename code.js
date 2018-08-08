@@ -1,7 +1,7 @@
 var frame = document.getElementById("frame");
 var graphics = frame.getContext("2d");
 
-var scale = 50;
+var scale = 10;
 var cols = frame.width / scale + 2;
 var rows = frame.height / scale + 2;
 var cells = [];
