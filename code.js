@@ -1,13 +1,20 @@
 var frame = document.getElementById("frame");
 var graphics = frame.getContext("2d");
 
-var scale = 10;
+frame.addEventListener("mousedown", mousePressed);
+frame.addEventListener("click", singleDraw);
+frame.addEventListener("mouseup", mouseReleased);
+frame.addEventListener("mousemove", mouseMoved);
+frame.addEventListener("drag", mouseMoved);
+
+var scale = 20;
 var cols = frame.width / scale + 2;
 var rows = frame.height / scale + 2;
 var cells = [];
 var play = true;
 var speed = 100;
 var speedLabel = document.getElementById("speedL");
+var mousePress;
 
 onCreate()
 
@@ -65,6 +72,28 @@ function getStaticArray(){
 		}
 	}
 	return array;
+}
+
+function mousePressed(){
+	mousePress = true;
+}
+
+function mouseReleased(){
+	mousePress = false;
+}
+
+function singleDraw(){
+	var x = Math.floor((event.x - frame.offsetLeft) / scale);
+	var y = Math.floor((event.y - frame.offsetTop) / scale);
+	cells[x + 1][y + 1].alive = true;
+}
+
+function mouseMoved(event){
+	if(mousePress){
+		var x = Math.floor((event.x - frame.offsetLeft) / scale);
+		var y = Math.floor((event.y - frame.offsetTop) / scale);
+		cells[x + 1][y + 1].alive = true;
+	}
 }
 
 function playButtonClick(btn){
