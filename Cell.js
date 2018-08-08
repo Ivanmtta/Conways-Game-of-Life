@@ -4,6 +4,13 @@ function Cell(x, y, size, alive){
 	this.size = size;
 	this.alive = alive;
 
+	this.update = function(aliveNeighbors){
+		if(aliveNeighbors < 0){
+			console.log(aliveNeighbors);
+			this.alive = false;
+		}
+	}
+
 	this.draw = function(){
 		if(this.alive){
 			graphics.fillStyle = "#FFFFFF";
