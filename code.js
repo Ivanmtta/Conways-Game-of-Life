@@ -7,7 +7,7 @@ frame.addEventListener("mouseup", mouseReleased);
 frame.addEventListener("mousemove", mouseMoved);
 frame.addEventListener("drag", mouseMoved);
 
-var scale = 20;
+var scale = 10;
 var cols = frame.width / scale + 2;
 var rows = frame.height / scale + 2;
 var cells = [];
@@ -68,7 +68,7 @@ function getStaticArray(){
 
 	for(var i = 0; i < cols; i++){
 		for(var j = 0; j < rows; j++){
-			array[i][j] = cells[i][j];
+			array[i][j] = new Cell(i * scale, j * scale, scale, cells[i][j].alive);
 		}
 	}
 	return array;
