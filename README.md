@@ -13,4 +13,4 @@ The universe of the Game of Life is an infinite two-dimensional orthogonal grid 
 
 ## You can play the game on my website! 
 
-> https://ivanmtta.github.io/
+> https://ivanmtta.github.io/gameoflife/index.html
