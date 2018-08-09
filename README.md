@@ -12,6 +12,5 @@ The universe of the Game of Life is an infinite two-dimensional orthogonal grid 
 * Any dead cell with exactly three live neighbours will come back to life.
 
 ## You can play the game on my website! 
-'''
-https://ivanmtta.github.io/
-'''
+
+> https://ivanmtta.github.io/
