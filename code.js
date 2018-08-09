@@ -12,9 +12,10 @@ var cols = frame.width / scale + 2;
 var rows = frame.height / scale + 2;
 var cells = [];
 var play = true;
-var speed = 100;
 var speedLabel = document.getElementById("speedL");
+var speed = 50;
 var mousePress;
+var showDeadCells = false;
 
 onCreate()
 
@@ -23,20 +24,15 @@ function onCreate(){
 	for(var i = 0; i < cols; i++){
 		cells.push([]);
 	}
-
-	for(var i = 0; i < cols; i++){
-		for(var j = 0; j < rows; j++){
-			cells[i][j] = new Cell(i * scale, j * scale, scale, Math.floor(Math.random() * 10) == 1);
-		}
-	}
+	generateCells();
 }
 
 function update(){
 	draw();
 	if(play){
 		var tempArray = getStaticArray();
-		for(var i = 1; i < cells.length - 1; i++){
-			for(var j = 1; j < cells[0].length - 1; j++){
+		for(var i = 1; i < cols - 1; i++){
+			for(var j = 1; j < rows - 1; j++){
 				var aliveNeighbors = 0;
 				for(var k = i - 1; k < i + 2; k++){
 					for(var l = j - 1; l < j + 2; l++){
@@ -53,8 +49,8 @@ function update(){
 
 function draw(){
 	graphics.clearRect(0, 0, frame.width + scale, frame.height + scale);
-	for(var i = 1; i < cells.length - 1; i++){
-		for(var j = 1; j < cells[0].length - 1; j++){
+	for(var i = 1; i < cols - 1; i++){
+		for(var j = 1; j < rows - 1; j++){
 			cells[i][j].draw();
 		}
 	}
@@ -96,7 +92,7 @@ function mouseMoved(event){
 	}
 }
 
-function playButtonClick(btn){
+function controlGame(btn){
 	if(play){
 		play = false;
 		btn.value = "Play";
@@ -107,18 +103,24 @@ function playButtonClick(btn){
 	}
 }
 
-function clearButtonClick(){
-	for(var i = 0; i < cells.length; i++){
-		for(var j = 0; j < cells[0].length; j++){
+function clearCells(){
+	for(var i = 0; i < cols; i++){
+		for(var j = 0; j < rows; j++){
 			cells[i][j].alive = false;
+			cells[i][j].wasAlive = false;
 		}
 	}
 }
 
-function generateButtonClick(){
+function generateCells(){
 	for(var i = 0; i < cols; i++){
 		for(var j = 0; j < rows; j++){
-			cells[i][j] = new Cell(i * scale, j * scale, scale, Math.floor(Math.random() * 10) == 1);
+			if(i == 0 || j == 0 || i == cols - 1 || j == rows -1){
+				cells[i][j] = new Cell(i * scale, j * scale, scale, false);
+			}
+			else{
+				cells[i][j] = new Cell(i * scale, j * scale, scale, Math.floor(Math.random() * 5) == 1);
+			}
 		}
 	}
 }
@@ -139,6 +141,15 @@ function decreaseSpeed(){
 		clearInterval(interval);
 		interval = setInterval(update, speed);
 	}
+}
+
+function manageDeadCells(state){
+	for(var i = 0; i < cols; i++){
+		for(var j = 0; j < rows; j++){
+			cells[i][j].wasAlive = false;
+		}
+	}
+	showDeadCells = state.checked;
 }
 
 var interval = setInterval(update, speed);
