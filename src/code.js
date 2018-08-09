@@ -79,15 +79,17 @@ function mouseReleased(){
 }
 
 function singleDraw(){
-	var x = Math.floor((event.x - frame.offsetLeft) / scale);
-	var y = Math.floor((event.y - frame.offsetTop) / scale);
+	var rect = frame.getBoundingClientRect();
+	var x = Math.floor((event.clientX - rect.left) / scale);
+	var y = Math.floor((event.clientY - rect.top) / scale);
 	cells[x + 1][y + 1].alive = true;
 }
 
 function mouseMoved(event){
 	if(mousePress){
-		var x = Math.floor((event.x - frame.offsetLeft) / scale);
-		var y = Math.floor((event.y - frame.offsetTop) / scale);
+		var rect = frame.getBoundingClientRect();
+		var x = Math.floor((event.clientX - rect.left) / scale);
+		var y = Math.floor((event.clientY - rect.top) / scale);
 		cells[x + 1][y + 1].alive = true;
 	}
 }
